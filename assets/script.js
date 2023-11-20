@@ -5,17 +5,34 @@
 
 //global variables
 var openWeatherApiKey = "[my_Api_Key]";
-var openWeatherUrl = "https://api.openweathermap.org/data/2.5/weather?q=";
-var oneCallUrl = "https://api.openweathermap.org/data/2.5/onecall?lat";
-
+var savedCities = [];
 
 // make list of previously searched cities
-var searchHistoryList = function(cityName) {
-    $('.past-search:contains("' + cityName + '")').remove();
+var searchHistoryList = function (cityName) {
+  $('.last-search:contains("' + cityName + '")').remove();
 
+  //city name
+  var historySearch = $("<p>");
+  historySearch.addClass("last-search");
+  historySearch.text(cityName);
 
+  //container for historySearch
+  var historySearchContainer = $("<div>");
+  historySearchContainer.addClass("last-search-container");
 
+  //append historySearch to container
+  historySearchContainer.append(historySearch);
 
+  //append to history id
+  var historyEl = $("#history");
+  historyEl.append(historySearchContainer);
 
-
-}
+  //if statement to populate the savedCities with previous cities
+  if (savedCities.length > 0) {
+    var previousSavedCities = localStorage.getItem("savedCities");
+    savedCities = JSON.parse(previousSavedCities);
+  }
+  //push a city into the array
+  savedCities.push(cityName);
+  localStorage.setItem("savedCities", JSON.stringify(savedCities));
+};
