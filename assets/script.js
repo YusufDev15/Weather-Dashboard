@@ -8,7 +8,7 @@ var openWeatherApiKey = "[my_Api_Key]";
 var savedCities = [];
 
 // make list of previously searched cities
-var searchHistoryList = function (cityName) {
+var historySearchList = function (cityName) {
   $('.last-search:contains("' + cityName + '")').remove();
 
   //city name
@@ -35,4 +35,25 @@ var searchHistoryList = function (cityName) {
   //push a city into the array
   savedCities.push(cityName);
   localStorage.setItem("savedCities", JSON.stringify(savedCities));
+
+  //clear search input
+  $("#search-input").val("");
 };
+
+//save the searched cities in the historyEl container
+var loadHistorySearch = function () {
+  //from local storage get the saved cities
+  var savedHistorySearch = localStorage.getItem("savedCities");
+  //return false if there isn't any previous saved cities
+  if (!savedHistorySearch) {
+    return false;
+  }
+  //turn the string into an array
+  savedHistorySearch = JSON.parse(savedHistorySearch);
+
+  //for loop for each item in the list
+  for (var i = 0; i < savedHistorySearch.length; i++) {
+    historySearchList(savedHistorySearch[i]);
+  }
+};
+console.log("I AM WORKING!!!!!");
