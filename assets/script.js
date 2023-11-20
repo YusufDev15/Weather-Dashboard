@@ -4,7 +4,7 @@
 //use local storage to save the user input
 
 //global variables
-var openWeatherApiKey = "[my_Api_Key]";
+var openWeatherApiKey = "API_KEY";
 var savedCities = [];
 
 // make list of previously searched cities
@@ -56,4 +56,17 @@ var loadHistorySearch = function () {
     historySearchList(savedHistorySearch[i]);
   }
 };
-console.log("I AM WORKING!!!!!");
+
+var queryURL =
+  "https://api.openweathermap.org/data/2.5/weather?" +
+  "q=London&appid=" +
+  openWeatherApiKey;
+
+fetch(queryURL)
+  .then(function (response) {
+    return response.json();
+  })
+  .then(function (data) {
+    console.log(queryURL);
+    console.log(data);
+  });
