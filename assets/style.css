@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+h1 {
+  padding: 4px;
+}
+
+#form-heading {
+  padding: 10px;
+}
+
+.form-label {
+  font-size: 20px;
+  font-weight: 600;
+}
+
+#search-input {
+  width: 100%;
+  height: 40px;
+  border-color: darkblue;
+  border-width: thin;
+  padding: 0 15px;
+}
+
+#search-button {
+  padding: 10px 15px;
+}
+
+#history {
+  padding: 10px;
+}
+
+.last-search {
+    background-color: white;
+    border-color: darkgray;
+    border-width: medium;
+    border-radius: 5px;
+    border-style: solid;
+    width: 350px;
+    margin: 0;
+    text-align: left;
+    line-height: 45px;
+    height: 45px;
+    padding: 0 20px;
+    color: grey;
+}

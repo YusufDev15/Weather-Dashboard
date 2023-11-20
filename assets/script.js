@@ -16,16 +16,16 @@ var historySearchList = function (cityName) {
   historySearch.addClass("last-search");
   historySearch.text(cityName);
 
-  //container for historySearch
-  var historySearchContainer = $("<div>");
-  historySearchContainer.addClass("last-search-container");
+  //container-div for historySearch
+  var historySearchDiv = $("<div>");
+  historySearchDiv.addClass("last-search-container");
 
-  //append historySearch to container
-  historySearchContainer.append(historySearch);
+  //append historySearch to the div
+  historySearchDiv.append(historySearch);
 
   //append to history id
   var historyEl = $("#history");
-  historyEl.append(historySearchContainer);
+  historyEl.append(historySearchDiv);
 
   //if statement to populate the savedCities with previous cities
   if (savedCities.length > 0) {
