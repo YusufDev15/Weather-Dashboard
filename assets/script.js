@@ -55,12 +55,6 @@ var loadHistorySearch = function () {
   }
 };
 
-var queryURL =
-  "https://api.openweathermap.org/data/2.5/weather?q=" +
-  cityName +
-  "&appid=" +
-  openWeatherApiKey;
-
 var getCurrentWeather = function (cityName) {
   var queryURL =
     "https://api.openweathermap.org/data/2.5/weather?q=" +
@@ -127,5 +121,3 @@ var getCurrentWeather = function (cityName) {
       alert("City not found or there was an error. Please try again.");
     });
 };
-
-
