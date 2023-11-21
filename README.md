@@ -1,17 +1,17 @@
 
 # Weather-dashboard
-I created an app that allows users to see the weather forecast for cities of their choosing. It shows the weather for any chosen city for the current day and also the next 5 days.
+I created an app that allows users to see the weather forecast for cities of their choosing. It shows the weather for any chosen city for the current day and also the next 5 days. It will show the temperature, humidity and wind-speed.
 
 
 
 ## Installation
 
-This app will run in the browser using HTML, CSS, JavaScript and Jquery.
+This app will run in the browser using HTML, CSS, JavaScript and Jquery and the application of openweather with an API key.
 
     
 ## Screenshots
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./assets/images/screencapture-file-C-Users-Yusuf-OneDrive-Desktop-class-Challenges-Weather-Dashboard-index-html-2023-11-21-23_31_04.png)
 
 
 ## Deployment
