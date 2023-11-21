@@ -57,9 +57,9 @@ var loadHistorySearch = function () {
 
 var getCurrentWeather = function (cityName) {
   var queryURL =
-    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    `https://api.openweathermap.org/data/2.5/weather?q=` +
     cityName +
-    "&appid=" +
+    `&appid=` +
     openWeatherApiKey;
 
   fetch(queryURL)
@@ -74,13 +74,13 @@ var getCurrentWeather = function (cityName) {
       var cityLat = data.coord.lat;
 
       var oneCallQueryURL =
-        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        `https://api.openweathermap.org/data/2.5/onecall?lat=` +
         cityLat +
-        "&lon=" +
+        `&lon=` +
         cityLon +
-        "&exclude=minutely,hourly,daily&appid=" +
+        `&exclude=minutely,hourly,daily&appid=` +
         openWeatherApiKey +
-        "&units=metric";
+        `&units=metric`;
 
       return fetch(oneCallQueryURL);
     })
@@ -100,7 +100,7 @@ var getCurrentWeather = function (cityName) {
       var WeatherIconEl = $("#todays-weather-icon");
       WeatherIconEl.attr(
         "src",
-        "https://openweathermap.org/img/wn/" + todaysIconCode + ".png"
+        `https://openweathermap.org/img/wn/` + todaysIconCode + `.png`
       );
       //todays temp</div></p>
       var todaysTempEl = $("#todays-temperature");
@@ -118,6 +118,76 @@ var getCurrentWeather = function (cityName) {
       $("#search-input").val("");
 
       // alert the user that there is an error
-      alert("City not found or there was an error. Please try again.");
+      alert("City not found. Please try again.");
     });
 };
+
+var getWeatherForecast = function (cityName) {
+  var queryURL =
+    `https://api.openweathermap.org/data/2.5/weather?q=` +
+    cityName +
+    `&appid=` +
+    openWeatherApiKey;
+
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(queryURL);
+      console.log(data);
+
+      var cityLon = data.coord.lon;
+      var cityLat = data.coord.lat;
+
+      var oneCallQueryURL =
+        `https://api.openweathermap.org/data/2.5/onecall?lat=` +
+        cityLat +
+        `&lon=` +
+        cityLon +
+        `&exclude=minutely,hourly,daily&appid=` +
+        openWeatherApiKey +
+        `&units=metric`;
+
+      return fetch(oneCallQueryURL);
+    })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+    });
+  //weather forecast for the next 5 days
+  var forecastTitleEl = $(".forecast-title");
+  forecastTitleEl.text("5-Day Forecast:");
+
+  // using data from response, set up each day of 5 day forecast
+  for (var i = 1; i <= 5; i++) {
+    // add class to forecast cards to create card containers
+    var futureCard = $(".forecast-card");
+    futureCard.addClass("forecast-details");
+  }
+  // add date to 5 day forecast
+  var forecastDate = $("#forecast-date-" + i);
+  date = dayjs().add(i, "d").format("D/M/YYYY");
+  forecastDate.text(date);
+
+  // add icon to 5 day forecast
+  var forecastIcon = $("#forecast-icon-" + i);
+  forecastIcon.addClass("forecast-icon");
+  var forecastIconCode = data.daily[i].weather[0].icon;
+  forecastIcon.attr(
+    "src",
+    `https://openweathermap.org/img/wn/` + forecastIconCode + `.png`
+  );
+
+  // add temp to 5 day forecast
+  var forecastTemp = $("#forecast-temp-" + i);
+  forecastTemp.text("Temp: " + data.daily[i].temp.day + " \u00B0C");
+
+  // add humidity to 5 day forecast
+  var forecastHumidity = $("#forecast-humidity-" + i);
+  forecastHumidity.text("Humidity: " + data.daily[i].humidity + "%");
+};
+
+
