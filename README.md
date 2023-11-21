@@ -18,8 +18,8 @@ This app will run in the browser using HTML, CSS, JavaScript and Jquery and the 
 
 To deploy this project run
 
-https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js
-https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
+-https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js
+-https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js
 
 
 ## Credits
