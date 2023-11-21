@@ -4,10 +4,9 @@
 //use local storage to save the user input
 
 //global variables
-var openWeatherApiKey = "API_KEY";
+var openWeatherApiKey = "d7710e304709bf4a5c2281b6356d53fa";
 var savedCities = [];
 
-// make list of previously searched cities
 var historySearchList = function (cityName) {
   $('.last-search:contains("' + cityName + '")').remove();
 
@@ -40,7 +39,6 @@ var historySearchList = function (cityName) {
   $("#search-input").val("");
 };
 
-//save the searched cities in the historyEl container
 var loadHistorySearch = function () {
   //from local storage get the saved cities
   var savedHistorySearch = localStorage.getItem("savedCities");
@@ -58,15 +56,76 @@ var loadHistorySearch = function () {
 };
 
 var queryURL =
-  "https://api.openweathermap.org/data/2.5/weather?" +
-  "q=London&appid=" +
+  "https://api.openweathermap.org/data/2.5/weather?q=" +
+  cityName +
+  "&appid=" +
   openWeatherApiKey;
 
-fetch(queryURL)
-  .then(function (response) {
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(queryURL);
-    console.log(data);
-  });
+var getCurrentWeather = function (cityName) {
+  var queryURL =
+    "https://api.openweathermap.org/data/2.5/weather?q=" +
+    cityName +
+    "&appid=" +
+    openWeatherApiKey;
+
+  fetch(queryURL)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(queryURL);
+      console.log(data);
+
+      var cityLon = data.coord.lon;
+      var cityLat = data.coord.lat;
+
+      var oneCallQueryURL =
+        "https://api.openweathermap.org/data/2.5/onecall?lat=" +
+        cityLat +
+        "&lon=" +
+        cityLon +
+        "&exclude=minutely,hourly,daily&appid=" +
+        openWeatherApiKey +
+        "&units=metric";
+
+      return fetch(oneCallQueryURL);
+    })
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      historySearchList(cityName);
+
+      //add city name, weather icon and date to section
+      var titleEl = $("#title");
+      // use dayjs to  display the date
+      var currentDateEl = dayjs().format("M/D/YYYY");
+      titleEl.text(cityName + currentDateEl);
+
+      var todaysIconCode = data.current.weather[0].icon;
+      var WeatherIconEl = $("#todays-weather-icon");
+      WeatherIconEl.attr(
+        "src",
+        "https://openweathermap.org/img/wn/" + todaysIconCode + ".png"
+      );
+      //todays temp</div></p>
+      var todaysTempEl = $("#todays-temperature");
+      todaysTempEl.text("Temperature: " + data.current.temp + "\u00B0C");
+
+      //todays wind speed
+      var todaysWindEl = $("#todays-wind-speed");
+      todaysWindEl.text("Wind: " + data.current.wind_speed + " KPH");
+
+      // todays humidity
+      var todaysHumidityEl = $("#todays-humidity");
+      todaysHumidityEl.text("Humidity: " + data.current.humidity + "%");
+    })
+    .catch(function (error) {
+      $("#search-input").val("");
+
+      // alert the user that there is an error
+      alert("City not found or there was an error. Please try again.");
+    });
+};
+
+
