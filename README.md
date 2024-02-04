@@ -27,15 +27,15 @@ I created an app that allows users to see the weather forecast for cities of the
    git clone git@github.com:YusufDev15/Weather-Dashboard.git
    ```
 
-2.Navigate to the project directory:
+2. Navigate to the project directory:
   ```bash
   cd Weather-Dashboard/
   ```
-3.Open the index.html file in your preferred web browser.
+3. Open the index.html file in your preferred web browser.
 
-4.Register for an API key at OpenWeatherMap and replace in the code with your API key.
+4. Register for an API key at OpenWeatherMap and replace in the code with your API key.
 
-5.Start exploring weather conditions for multiple cities!
+5. Start exploring weather conditions for multiple cities!
 
     
 ## Screenshots
