@@ -68,7 +68,7 @@ To deploy this project run
 - https://api.openweathermap.org/data/2.5/weather?q=;
 - https://api.openweathermap.org/data/2.5/onecall?lat;
 - https://jquery.com/
-- chatGPT
+- https://chat.openai.com
 
 ## License
 
